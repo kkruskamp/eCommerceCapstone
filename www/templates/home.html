@@ -1,0 +1,21 @@
+<ion-view>
+	<ion-nav-title> Welcome to goPack! </ion-nav-title>
+	<ion-content>
+
+		<ion-slide-box show-pager = "true" does-continue = "true" pager-click = "true" auto-play = "true" slide-interval = "5000">
+			<ion-slide ng-repeat = "count in [1,2,3,4]">
+				<img ng-src = "img/home_slider/{{count}}.jpeg" class = "full-image"/>
+			</ion-slide>
+		</ion-slide-box>
+
+		<ion-list class = "list-card"> 
+			
+			<ion-item class = "item-dividier item-button-right"> Shop by Category
+				<button class = "button button-small button-clear button-assertive"> View All 
+				</button>
+			</ion-item>
+
+		</ion-list>
+
+	</ion-content>
+</ion-view>

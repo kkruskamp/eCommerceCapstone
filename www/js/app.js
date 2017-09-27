@@ -3,7 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+
+ angular.module('starter', ['ionic', 'starter.services'])
+//angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,4 +23,49 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
+})
+
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+
+  .state('app', {
+    url: '/app',
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl',
+    abstract: true
+  })
+
+  .state('app.home', {
+    url: '/home',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
+      }
+    }
+  });
+
+  $urlRouterProvider.otherwise('/app/home');
+})
+
+.controller('AppCtrl', function($scope, WC){
+
+    var Woocommerce = WC.WC();
+    
+    Woocommerce.get('products/categories', function(err, data, res){
+      console.log(res);
+
+      $scope.categories = (JSON.parse(res));
+      $scope.mainCategories = [];
+      $scope.categories.forEach(function(element, index) {
+        
+        if (element.parent == 0){
+          $scope.mainCategories.push(element);
+        }
+      })
+    })
+})
+
+.controller('HomeCtrl', function(){
+  
 })
