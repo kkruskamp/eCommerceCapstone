@@ -1,0 +1,20 @@
+<ion-view> 
+	<ion-nav-title> Browse Products </ion-nav-title>
+	<ion-content>
+		<ion-refresher pulling-text = "Refresh" on-refresh = "doRefresh()"></ion-refresher>
+		<ion-list>
+			<ion-item class = "item-thumbnail-left item-button-right" ng-repeat = "product in products">
+
+				<img ui-sref = "app.product({productID: product.id})" ng-src = "{{product.images[0].src}}"/>
+				<h2 ui-sref = "app.product({productID: product.id})">{{product.name}}</h2>
+				<p ui-sref = "app.product({productID: product.id})">{{product.categories[0].name}}<br>
+				<span ui-sref = "app.product({productID: product.id})">${{product.price}}</span></p>
+				<button class = "button button-passive" ng-click = "addToCart(product)">
+					<i class = "icon ion-android-cart"> </i>
+				</button>
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll on-infinite = "loadMore()" ng-if = "canLoadMore" immediate-check = "false">
+		</ion-infinite-scroll>
+	</ion-content>
+</ion-view>

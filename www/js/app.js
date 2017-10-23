@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
- angular.module('starter', ['ionic', 'starter.services'])
+ angular.module('starter', ['ionic','starter.services','starter.controllers','ngStorage'])
 //angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
@@ -43,29 +43,58 @@
         controller: 'HomeCtrl'
       }
     }
-  });
+  })
 
-  $urlRouterProvider.otherwise('/app/home');
-})
+  .state('app.product', {
+    url: '/product/:productID',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/product.html',
+        controller: 'ProductCtrl'
+      }
+    }
+  })
 
-.controller('AppCtrl', function($scope, WC){
+  .state('app.signup', {
+    url: '/signup/',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/signup.html',
+        controller: 'SignupCtrl'
+      }
+    }
+  })
 
-    var Woocommerce = WC.WC();
-    
-    Woocommerce.get('products/categories', function(err, data, res){
-      console.log(res);
+  .state('app.browse', {
+    url: '/browse',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/browse.html',
+        controller: 'BrowseCtrl'
+      }
+    }
+  })
 
-      $scope.categories = (JSON.parse(res));
-      $scope.mainCategories = [];
-      $scope.categories.forEach(function(element, index) {
-        
-        if (element.parent == 0){
-          $scope.mainCategories.push(element);
-        }
-      })
-    })
-})
+  .state('app.categories', {
+    url: '/categories',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/categories.html',
+        controller: 'CategoriesCtrl'
+      }
+    }
+  })
 
-.controller('HomeCtrl', function(){
+  // .state('app.category', {
+  //   url: '/categories/:categoryID',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/category.html',
+  //       controller: 'CategoryCtrl'
+  //     }
+  //   }
+  // })
+  ;
   
+  $urlRouterProvider.otherwise('/app/home');
 })
