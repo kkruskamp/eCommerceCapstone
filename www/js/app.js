@@ -85,15 +85,15 @@
     }
   })
 
-  // .state('app.category', {
-  //   url: '/categories/:categoryID',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/category.html',
-  //       controller: 'CategoryCtrl'
-  //     }
-  //   }
-  // })
+  .state('app.category', {
+    url: '/categories/:categoryID',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/category.html',
+        controller: 'CategoryCtrl'
+      }
+    }
+  })
   ;
   
   $urlRouterProvider.otherwise('/app/home');

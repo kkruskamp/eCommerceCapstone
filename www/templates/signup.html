@@ -26,6 +26,8 @@
 				<input type = "text" ng-model = "newUser.password">
 			</label>
 
+<!-- ========================================== BILLING =============================================== -->
+
 			<div class = "item item-divider"> Billing Information </div>
 
 			<label class = "item item-input">
@@ -48,6 +50,16 @@
 			</label>
 
 			<label class = "item item-input">
+				<span class = "input-label"> City </span>
+				<input type = "text" ng-model = "newUser.billing_address.city">
+			</label>
+
+			<label class = "item item-input">
+				<span class = "input-label"> State </span>
+				<input type = "text" ng-model = "newUser.billing_address.state">
+			</label>
+
+			<label class = "item item-input">
 				<span class = "input-label"> Zip Code </span>
 				<input type = "text" ng-model = "newUser.billing_address.postcode">
 			</label>
@@ -57,14 +69,12 @@
 				<input type = "text" ng-model = "newUser.billing_address.phone">
 			</label>
 
-			<ion-checkbox ng-model = "newUser.billingToShipping" ng-change = "switchBillingToShipping()">
-				Shipping address is the same
-			</ion-checkbox>
-			
-			<div class = "item item-divider" ng-hide = "newUser.billingToShipping">
-				Shipping Information
-			</div>
+<!-- ===========================================SHIPPING ================================================== -->
 
+			<ion-checkbox ng-model = "newUser.billingToShipping" ng-change = "switchBillingToShipping()"> Shipping address is the same </ion-checkbox>
+
+			<div class = "item item-divider" ng-hide = "newUser.billingToShipping"> Shipping Information </div>
+			
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Address Line 1 </span>
 				<input type = "text" ng-model = "newUser.shipping_address.address1">
@@ -75,13 +85,23 @@
 				<input type = "text" ng-model = "newUser.shipping_address.address2">
 			</label>
 
-<label class = "item item-input item-select" ng-hide = "newUser.billingToShipping">
+			<label class = "item item-input item-select" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Country </span>
 				<select ng-model = "newUser.shipping_address.country">
 					<option selected> USA </option>
 					<option> China </option>
 					<option> Mexico </option>
 				</select>
+			</label>
+
+			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
+				<span class = "input-label"> City </span>
+				<input type = "text" ng-model = "newUser.billing_address.state">
+			</label>
+
+			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
+				<span class = "input-label"> State </span>
+				<input type = "text" ng-model = "newUser.billing_address.state">
 			</label>
 
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
@@ -94,11 +114,12 @@
 				<input type = "text" ng-model = "newUser.shipping_address.phone">
 			</label>
 
+<!-- ==========================================================CANCEL OR SIGN UP================================================== -->
+
 		<div class = "button-bar">
 			<button class = "button button-assertive button-block outline"> Cancel </button>
 			<button class = "button button-balanced button-block" ng-disabled = "{{!newUser.isValid}}" ng-click = "signUp(newUser)"> Sign Up </button>
 		</div>
 	</div>
-
 </ion-content>
 </ion-view>
