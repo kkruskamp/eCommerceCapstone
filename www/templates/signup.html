@@ -32,17 +32,17 @@
 
 			<label class = "item item-input">
 				<span class = "input-label"> Address Line 1 </span>
-				<input type = "text" ng-model = "newUser.billing_address.address1">
+				<input type = "text" ng-model = "newUser.billing.address1">
 			</label>
 
 			<label class = "item item-input">
 				<span class = "input-label"> Address Line 2 </span>
-				<input type = "text" ng-model = "newUser.billing_address.address2">
+				<input type = "text" ng-model = "newUser.billing.address2">
 			</label>
 
 			<label class = "item item-input item-select">
 				<span class = "input-label"> Country </span>
-				<select ng-model = "newUser.billing_address.country">
+				<select ng-model = "newUser.billing.country">
 					<option selected> USA </option>
 					<option> China </option>
 					<option> Mexico </option>
@@ -51,24 +51,23 @@
 
 			<label class = "item item-input">
 				<span class = "input-label"> City </span>
-				<input type = "text" ng-model = "newUser.billing_address.city">
+				<input type = "text" ng-model = "newUser.billing.city">
 			</label>
 
 			<label class = "item item-input">
 				<span class = "input-label"> State </span>
-				<input type = "text" ng-model = "newUser.billing_address.state">
+				<input type = "text" ng-model = "newUser.billing.state">
 			</label>
 
 			<label class = "item item-input">
 				<span class = "input-label"> Zip Code </span>
-				<input type = "text" ng-model = "newUser.billing_address.postcode">
+				<input type = "text" ng-model = "newUser.billing.postcode">
 			</label>
 
 			<label class = "item item-input">
 				<span class = "input-label"> Phone </span>
-				<input type = "text" ng-model = "newUser.billing_address.phone">
+				<input type = "text" ng-model = "newUser.billing.phone">
 			</label>
-
 <!-- ===========================================SHIPPING ================================================== -->
 
 			<ion-checkbox ng-model = "newUser.billingToShipping" ng-change = "switchBillingToShipping()"> Shipping address is the same </ion-checkbox>
@@ -77,17 +76,17 @@
 			
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Address Line 1 </span>
-				<input type = "text" ng-model = "newUser.shipping_address.address1">
+				<input type = "text" ng-model = "newUser.shipping.address1">
 			</label>
 
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Address Line 2 </span>
-				<input type = "text" ng-model = "newUser.shipping_address.address2">
+				<input type = "text" ng-model = "newUser.shipping.address2">
 			</label>
 
 			<label class = "item item-input item-select" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Country </span>
-				<select ng-model = "newUser.shipping_address.country">
+				<select ng-model = "newUser.shipping.country">
 					<option selected> USA </option>
 					<option> China </option>
 					<option> Mexico </option>
@@ -96,22 +95,22 @@
 
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> City </span>
-				<input type = "text" ng-model = "newUser.billing_address.state">
+				<input type = "text" ng-model = "newUser.billing.state">
 			</label>
 
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> State </span>
-				<input type = "text" ng-model = "newUser.billing_address.state">
+				<input type = "text" ng-model = "newUser.billing.state">
 			</label>
 
 			<label class = "item item-input" ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Zip Code </span>
-				<input type = "text" ng-model = "newUser.shipping_address.postcode">
+				<input type = "text" ng-model = "newUser.shipping.postcode">
 			</label>
 
 			<label class = "item item-input"  ng-hide = "newUser.billingToShipping">
 				<span class = "input-label"> Phone </span>
-				<input type = "text" ng-model = "newUser.shipping_address.phone">
+				<input type = "text" ng-model = "newUser.shipping.phone">
 			</label>
 
 <!-- ==========================================================CANCEL OR SIGN UP================================================== -->

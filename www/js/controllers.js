@@ -220,7 +220,8 @@ $scope.offset = 0;
           template: "<center> Email is already registered. </center>",
           buttons: [{
             text: "Login",
-            onTap: function(e) { $state.go("app.login"); }
+            onTap: function(e) { 
+              $state.go("app.login"); }
           },{
             text: "OK"
           }]
@@ -234,42 +235,42 @@ $scope.offset = 0;
   }
   
   $scope.switchBillingToShipping = function(){
-    $scope.newUser.shipping_address = $scope.newUser.billing_address;
+    $scope.newUser.shipping = $scope.newUser.billing;
   }
   
   $scope.signUp = function(newUser){
     
     var customerData = {};
     
-    customerData.customer = {
+    customerData = {
         "email": newUser.email,
         "first_name": newUser.first_name,
         "last_name": newUser.last_name,
         "username": newUser.email.split("@")[0],
         "password": newUser.password,
-        "billing_address": {
+        "billing": {
           "first_name": newUser.first_name,
           "last_name": newUser.last_name,
-          "address_1": newUser.billing_address.address_1,
-          "address_2": newUser.billing_address.address_2,
-          "city": newUser.billing_address.city,
-          "state": newUser.billing_address.state,
-          "zipcode": newUser.billing_address.postcode,
-          "country": newUser.billing_address.country,
+          "address_1": newUser.billing.address_1,
+          "address_2": newUser.billing.address_2,
+          "city": newUser.billing.city,
+          "state": newUser.billing.state,
+          "postcode": newUser.billing.postcode,
+          "country": newUser.billing.country,
           "email": newUser.email,
-          "phone": newUser.billing_address.phone
+          "phone": newUser.billing.phone
         },
-        "shipping_address": {
+        "shipping": {
           "first_name": newUser.first_name,
           "last_name": newUser.last_name,
-          "address_1": newUser.shipping_address.address_1,
-          "address_2": newUser.shipping_address.address_2,
-          "city": newUser.shipping_address.city,
-          "state": newUser.shipping_address.state,
-          "zipcode": newUser.shipping_address.postcode,
+          "address_1": newUser.shipping.address_1,
+          "address_2": newUser.shipping.address_2,
+          "city": newUser.shipping.city,
+          "state": newUser.shipping.state,
+          "postcode": newUser.shipping.postcode,
           "email": newUser.email,
-          "phone": newUser.billing_address.phone,
-          "country": newUser.shipping_address.country
+          "phone": newUser.billing.phone,
+          "country": newUser.shipping.country
         }
       }
     
@@ -277,7 +278,7 @@ $scope.offset = 0;
     
     Woocommerce.post('customers', customerData, function(err, data, res){
 
-      if(JSON.parse(res).customer){
+      if(JSON.parse(res)){
         $ionicPopup.show({
           title: "Welcome!",
           template: "Account creation successful. Please login.",
@@ -294,7 +295,7 @@ $scope.offset = 0;
       else {
         $ionicPopup.show({
           title: "OOPS",
-          template: JSON.parse(res).errors[0].message,
+          template: JSON.parse(res),
           buttons: [{
             text: "OK",
             type: "button-assertive"
@@ -335,4 +336,47 @@ $scope.offset = 0;
       $scope.$apply();
     }
   }) 
+})
+
+.controller('LoginCtrl', function($scope, $http, $localStorage, $ionicPopup, $state, WC, $ionicHistory){
+  
+  $scope.login = function(userData){
+    
+    $http.get('http://samarth.southeastasia.cloudapp.azure.com/api/auth/generate_auth_cookie/?insecure=cool&username='+userData.username+'&password='+userData.password)
+    .then(function(response){
+      console.log(response);
+      
+      if(response.data.user){
+        $localStorage.userData = response;
+        $ionicPopup.show({
+          title: 'Welcome ' + response.data.user.displayname,
+          template: '<center>You have logged in successfully.</center>',
+          buttons: [{
+            text: 'OK',
+            onTap: function(e){
+              $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+              });
+              $ionicHistory.clearHistory();
+              $ionicHistory.clearCache();
+              $state.go('app.home');
+            }
+          }]
+        })
+      }
+      else {
+        $ionicPopup.show({
+          title: 'Something is wrong. Please Check.',
+          template: '<center>Please check your username and password.</center>',
+          buttons: [{
+            text: 'Retry'
+          }]
+        })
+      }
+    });
+    
+  }
+  
+  
 })
